@@ -1,55 +1,57 @@
 
 package com.company;
 
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+// import java.util.Scanner;
 
 /**
  * Created by nameuk on 6/29/17.
  */
 public class Q2609 {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String input[];
+        int a, b;
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int first = sc.nextInt();
-        int second = sc.nextInt();
+        input = br.readLine().split(" ");
+        a = Integer.parseInt(input[0]);
+        b = Integer.parseInt(input[1]);
 
-        //find prime number;
-        int priNum[] = new int[10001];
-        int Cnt = 0;
+        int A = a, B = b, r = 0;
+        int gcd = 0, lcm;
+        boolean check = true;
 
-        priNum[0] = priNum[1] = -1;
-
-        for (int i = 2; i < priNum.length; i++) {
-            if (priNum[i] == 0) {
-                priNum[i] = 1;
-                Cnt++;
-                for (int j = i + 1; j < priNum.length; j++) {
-                    if (j % i == 0) priNum[j] = -1;
-                }
+        while (check) {
+            r = a % b;
+            if (r == 0) {
+                gcd = b;
+                check = false;
             }
+            a = b;
+            b = r;
         }
-
-        // arrange the prime number array.
-        int prime[] = new int[Cnt + 2];
-        int temp = 0;
-        for (int i = 0; i < priNum.length; i++) {
-            if (priNum[i] == 1) {
-                prime[temp] = i;
-                if (i < 20) System.out.println("prime [" + temp + "] is " + prime[temp]);
-                temp++;
-            }
-        }
-
-        //get the result
-        int length;
-        if( first >= second) length = first;
-        else length = second;
-
-        for (int i = 0; i < length; i++) {
-            if( first % prime[i] ==0 && second%prime[i] ==0){
-
-            }
-        }
-
+        lcm = (A / gcd) * (B / gcd) * gcd;
+        System.out.println(gcd + " " + lcm);
     }
+    /*public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        int A = a, B = b;
+        int r = 0, q = 0;
+        int gcd = 0, lcm = 0;
+        boolean check = true;
+        while (check) {
+            r = a % b;
+            if (r == 0) {
+                gcd = b; check = false;
+            }
+            a = b;
+            b = r;
+        }
+        lcm = (A / gcd) * (B / gcd) * gcd;
+        System.out.println(gcd + " " + lcm);
+    }*/
 }
